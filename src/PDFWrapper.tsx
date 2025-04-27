@@ -17,9 +17,11 @@ export default function PDFWrapper ({children}) {
                     unit: "px"})
             const imageProperties = pdf.getImageProperties(imgData);
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = imageProperties.height * pdfWidth / imageProperties.width;
+            // const pdfHeight = imageProperties.height * pdfWidth / imageProperties.width;
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            console.log(pdfWidth, pdfHeight);
 
-            pdf.addImage(imgData, 'JPEG', 0, 0,pdfWidth,pdfHeight);
+            pdf.addImage(imgData, 'JPEG', 0, 0,pdfWidth,pdfHeight-60);
             pdf.save("download.pdf"); 
         });
       };
